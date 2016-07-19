@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<request>
+	<type>14</type>
+	<guid/>
+	<body>
+		<checkAccount>
+			<idTerminal>{{ id_terminal }}</idTerminal>
+			<passmd5>{{ api_passmd5 }}</passmd5>
+			<numUser>{{ api_usernumber }}</numUser>
+			<sum>1</sum>
+			<idService>{{ id_service }}</idService>
+			<account>2@@{{ from_station }}@{{ to_station }}@{{ date }}</account>
+		</checkAccount>
+	</body>
+	<sign/>
+</request>

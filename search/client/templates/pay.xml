@@ -1,0 +1,29 @@
+
+<?xml version="1.0" encoding="utf-8"?>
+<request>
+	<guid>{{ guid }}</guid>
+	<type>3</type>
+	<body>
+		<payments>
+			<payment>
+				<account>{{ order_id }}</account>
+				<amount>{{ full_invoice }}</amount>
+				<idService>{{ id_service }}</idService>
+				<idTerminal>{{ id_terminal }}</idTerminal>
+				<date>{{ date }}</date>
+				<numTrans>{{ reference }}</numTrans>
+				<addings>
+					<adding>
+						<subservice>0</subservice>
+						<constraint>1;{{ order_id }};{{ express_id }}</constraint>
+						<amount0>{{ amount }}</amount0>
+						<amount1>0</amount1>
+						<amount2>0</amount2>
+						<memo />
+					</adding>
+				</addings>
+			</payment>
+		</payments>
+	</body>
+	<sign></sign>
+</request>

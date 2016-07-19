@@ -21,7 +21,7 @@ from django.conf.urls.static import static # New Import
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^search/', include('search.urls')),
-    url(r'^$', include('search.urls')),
+    url(r'$', include('search.urls')),
 ]
 
 if not settings.DEBUG:

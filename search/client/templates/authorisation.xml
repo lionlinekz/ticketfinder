@@ -1,0 +1,10 @@
+<request>
+	<type>1</type>
+	<body>
+		<idt>
+			<idTerminal>{{ id_terminal }}</idTerminal>
+			<passmd5>{{ api_passmd5 }}</passmd5>
+			<numUser>{{ api_usernumber }}</numUser>
+		</idt>
+	</body>
+</request>

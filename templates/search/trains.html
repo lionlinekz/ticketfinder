@@ -1,0 +1,144 @@
+				{% extends 'search/index.html' %}
+
+				{% load staticfiles %}
+
+				{% block body_block %}
+				{{ error }}
+				
+				<div class="search-row-wrapper" style="background-image: url(http://i.huffpost.com/gen/1468570/images/o-EUROPE-TRAIN-TRAVEL-facebook.jpg); background-position: center center;">
+					<div class="container text-center">
+						<form action="/search/get_trains/" method="post">
+{% csrf_token %}
+
+						<div class="col-sm-3">
+							<select class="form-control" name="from_station" id="id-location">
+								{% for station in stations %}
+								{% if station.long_name == "АСТАНА" %}
+								<option value="{{ station.code }}" selected="selected">{{ station.long_name }}</option>
+								{% else %}
+								<option value="{{ station.code }}">{{ station.long_name }}</option>
+								{% endif %}
+								{% endfor %}
+							</select>
+						</div>
+						<div class="col-sm-3">
+							<select class="form-control" name="to_station" id="id-location">
+								{% for station in stations %}
+								{% if station.long_name == "АЛМА-АТА 2" %}
+								<option value="{{ station.code }}" selected="selected">{{ station.long_name }}</option>
+								{% else %}
+								<option value="{{ station.code }}">{{ station.long_name }}</option>
+								{% endif %}
+								{% endfor %}
+							</select>
+						</div>
+						<div class="col-sm-3">
+							<input type="date" name="departure_date" class="form-control has-icon"  value="{{ departure_date }}">
+						</div>
+						<div class="col-sm-3">
+							<button type="submit" class="btn btn-block btn-primary  "> Поиск <i class="fa fa-search"></i></button>
+						</div>
+						</form>
+					</div>
+				</div>
+
+				<div class="main-container">
+					<div class="container">
+						<div class="row">
+
+							<div class="col-sm-12 page-content col-thin-left">
+								<div class="category-list">
+									<div class="row">
+										<div class="col-sm-3  col-xs-3 text-center">Поезд</div>
+										<div class="col-sm-1  col-xs-2">Отправление</div>
+										<div class="col-sm-1  col-xs-2">Время в пути</div>
+										<div class="col-sm-1  col-xs-2">Прибытие</div>
+										<div class="col-sm-4  col-xs-2">Места</div>
+										<div class="col-sm-2  col-xs-1">Выбор</div>
+
+									</div>
+
+									<div class="tab-box clearfix ">
+
+										<div class="col-lg-12  box-title no-border">
+										</div>
+
+
+										{% for train in train_seats %}
+										<div class="adds-wrapper jobs-list">
+											<div class="item-list job-item">
+
+												<div class="col-sm-3  col-xs-2">
+													<div class="add-details jobs-item">
+														<h5 class="number"><a href="#"> {{ train.number }} 
+															{{ train.direction }} </a></h5>
+													</div>
+												</div>
+
+												<div class="col-sm-1 col-xs-2">
+													<div class="">
+														<h4>{{ train.departure_time }}</h4></div>
+															</div>
+
+															<div class="col-sm-1 col-xs-4">
+																<div class="time">
+																	<h4>{{ train.duration }}</h4></div>
+																	</div>
+
+																	<div class="col-sm-1 col-xs-4">
+																		<div class="">
+																			<h4>{{ train.arrival_time }}</h4></div>
+																				</div>
+
+																				<div class="col-sm-4 col-xs-4">
+																					{% if train.luxury_seats %}
+																					<h5>
+																						{{ train.luxury_seats }} люксовых мест
+																						от {{ train.luxury_tariff }}₸
+																					</h5>
+																						{% endif %}
+																					
+																					{% if train.compartment_seats %}
+																					<h5>
+																						{{ train.compartment_seats }} купейных мест
+																						от {{ train.compartment_tariff }}₸
+																					</h5>
+																						{% endif %}
+																					
+																					{% if train.reserved_seats %}
+																					<h5>
+																						{{ train.reserved_seats }} плацкартных мест
+																						от {{ train.reserved_tariff }}₸
+																					</h5>
+																						{% endif %}
+																					
+
+																				</div>
+
+
+																				<div class="col-sm-2  col-xs-1">
+																					<button type="button" class="btn btn-success">Выбрать</button></div>
+																				</div>
+
+
+																			</div>
+																			{% endfor %}
+
+
+
+																		</div>
+
+																	</div>
+
+																	<div class="post-promo text-center">
+																		<h2> Не нашли подходящий билет? </h2>
+																		<h5> Оставьте нам заявку, мы приобретем ваш билет как только станет доступно </h5>
+																		<a href="http://templatecycle.com/demo/bootclassified-v1.4/dist/job-list.html" class="btn btn-lg btn-border btn-post btn-danger">Заказать билет </a></div>
+
+																	</div>
+
+																</div>
+															</div>
+														</div>
+
+														{% endblock %}

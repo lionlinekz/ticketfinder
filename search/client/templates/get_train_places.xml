@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<request>
+	<type>14</type>
+	<guid>{{ guid }}</guid>
+	<body>
+		<checkAccount>
+			<idTerminal>{{ id_terminal }}</idTerminal>
+			<passmd5>{{ api_passmd5 }}</passmd5>
+			<numUser>{{ api_usernumber }}</numUser>
+			<sum>0</sum>
+			<idService>{{ id_service }}</idService>
+			<account>3@@{{ from_station }}@{{ to_station }}@{{ date }}@{{ time }}@{{ train_number }}</account>
+		</checkAccount>
+	</body>
+</request>

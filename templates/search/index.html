@@ -28,15 +28,15 @@
 <div class="navbar-header">
 <button data-target=".navbar-collapse" data-toggle="collapse" class="navbar-toggle" type="button">
 <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span></button>
-<a href="http://templatecycle.com/demo/bootclassified-v1.4/dist/job-home.html" class="navbar-brand logo logo-title">
+<a href="/" class="navbar-brand logo logo-title">
  
 <span class="logo-icon"><i class="icon icon-search-1 ln-shadow-logo shape-0"></i> </span>
 TICKET<span>FINDER </span> </a></div>
 <div class="navbar-collapse collapse">
 <ul class="nav navbar-nav navbar-right">
-<li><a href="http://templatecycle.com/demo/bootclassified-v1.4/dist/job-login.html">Логин</a></li>
-<li><a href="http://templatecycle.com/demo/bootclassified-v1.4/dist/job-signup.html">Регистрация</a></li>
-<li class="postadd"><a class="btn btn-block   btn-border btn-post btn-danger" href="http://templatecycle.com/demo/bootclassified-v1.4/dist/job-post.html">Заказать</a></li>
+<li><a href="#">Логин</a></li>
+<li><a href="#">Регистрация</a></li>
+<li class="postadd"><a class="btn btn-block   btn-border btn-post btn-danger" href="#">Заказать</a></li>
 </ul>
 </div>
  
@@ -44,6 +44,7 @@ TICKET<span>FINDER </span> </a></div>
  
 </nav>
 </div>
+{% block body_block %}
  
 <div class="intro jobs-intro hasOverly" style="background-image: url(http://i.huffpost.com/gen/1468570/images/o-EUROPE-TRAIN-TRAVEL-facebook.jpg); background-position: center center;">
 <div class="dtable hw100">
@@ -51,53 +52,40 @@ TICKET<span>FINDER </span> </a></div>
 <div class="container text-center">
 <p class="sub animateme fittext3 animated fadeIn"> Укажите города и дату поездки</p>
 <div class="search-row animated fadeInUp">
+<form action="/search/get_trains/" method="post">
+{% csrf_token %}
 <div class="col-lg-3 col-sm-3 search-col relative locationicon">
 <i class="icon-location-2 icon-append"></i>
-							<select class="form-control" name="location" id="id-location">
-								<option selected="selected" value="">All Locations</option>
-								<option value="New York"> New York</option>
-								<option value="South-West"> South West</option>
-								<option value="South-East"> South East</option>
-								<option value="East-England"> East England</option>
-								<option value="East-Midlands"> East Midlands</option>
-								<option value="West-Midlands"> West Midlands</option>
-								<option value="North-East"> North East</option>
-								<option value="North-West"> North West</option>
-								<option value="Scotland"> Scotland</option>
-								<option value="Wales"> Wales</option>
-								<option value="Northern-Ireland"> Northern Ireland</option>
-								<option value="England"> England</option>
-								<option value="UK"> UK</option>
-								<option value="Other-Locations">Other Locations</option>
+							<select class="form-control" name="from_station" id="id-location">
+								{% for station in stations %}
+									{% if station.long_name == "АСТАНА" %}
+										<option value="{{ station.code }}" selected="selected">{{ station.long_name }}</option>
+									{% else %}
+										<option value="{{ station.code }}">{{ station.long_name }}</option>
+									{% endif %}
+								{% endfor %}
 							</select>
 
 </div>
 <div class="col-lg-3 col-sm-3 search-col relative locationicon">
 <i class="icon-location-2 icon-append"></i>
-							<select class="form-control" name="location" id="id-location">
-								<option selected="selected" value="">All Locations</option>
-								<option value="New York"> New York</option>
-								<option value="South-West"> South West</option>
-								<option value="South-East"> South East</option>
-								<option value="East-England"> East England</option>
-								<option value="East-Midlands"> East Midlands</option>
-								<option value="West-Midlands"> West Midlands</option>
-								<option value="North-East"> North East</option>
-								<option value="North-West"> North West</option>
-								<option value="Scotland"> Scotland</option>
-								<option value="Wales"> Wales</option>
-								<option value="Northern-Ireland"> Northern Ireland</option>
-								<option value="England"> England</option>
-								<option value="UK"> UK</option>
-								<option value="Other-Locations">Other Locations</option>
+							<select class="form-control" name="to_station" id="id-location">
+								{% for station in stations %}
+									{% if station.long_name == "АЛМА-АТА 2" %}
+										<option value="{{ station.code }}" selected="selected">{{ station.long_name }}</option>
+									{% else %}
+										<option value="{{ station.code }}">{{ station.long_name }}</option>
+									{% endif %}
+								{% endfor %}
 							</select>
 </div>
 <div class="col-lg-3 col-sm-3 search-col relative"><i class="icon-docs icon-append"></i>
-<input type="date" name="ads" class="form-control has-icon" placeholder="13.07.2016" value="">
+<input type="date" name="departure_date" class="form-control has-icon"  value="2016-07-22">
 </div>
 <div class="col-lg-3 col-sm-3 search-col">
-<button class="btn btn-primary btn-search btn-block"><i class="icon-search"></i><strong>Поиск</strong></button>
+<button type="submit" class="btn btn-primary btn-search btn-block"><i class="icon-search"></i><strong>Поиск</strong></button>
 </div>
+</form>
 </div>
 <div class="resume-up">
 <a><i class="icon-doc-4"></i></a> Мы предложим вам лучший доступный маршрут
@@ -116,6 +104,7 @@ TICKET<span>FINDER </span> </a></div>
 </div>
 </div>
 </div>
+{% endblock %}
 <div class="footer" id="footer">
 <div class="container">
 <ul class=" pull-right navbar-link footer-nav">
@@ -126,30 +115,6 @@ TICKET<span>FINDER </span> </a></div>
  
 </div>
  
- 
- 
-<script src="./BOOTCLASIFIED - Responsive Classified Theme_files/jquery.min.js"></script>
-<script src="./BOOTCLASIFIED - Responsive Classified Theme_files/bootstrap.min.js"></script>
- 
-<script src="./BOOTCLASIFIED - Responsive Classified Theme_files/owl.carousel.min.js"></script>
- 
-<script src="./BOOTCLASIFIED - Responsive Classified Theme_files/jquery.matchHeight-min.js"></script>
- 
-<script src="./BOOTCLASIFIED - Responsive Classified Theme_files/hideMaxListItem.js"></script>
- 
-<script src="./BOOTCLASIFIED - Responsive Classified Theme_files/jquery.fs.scroller.js"></script>
-<script src="./BOOTCLASIFIED - Responsive Classified Theme_files/jquery.fs.selecter.js"></script>
- 
-<script src="./BOOTCLASIFIED - Responsive Classified Theme_files/script.js"></script>
-<script>
-
-
-</script>
- 
-<script type="text/javascript" src="./BOOTCLASIFIED - Responsive Classified Theme_files/jquery.mockjax.js"></script>
-<script type="text/javascript" src="./BOOTCLASIFIED - Responsive Classified Theme_files/jquery.autocomplete.js"></script>
-<script type="text/javascript" src="./BOOTCLASIFIED - Responsive Classified Theme_files/usastates.js"></script>
-<script type="text/javascript" src="./BOOTCLASIFIED - Responsive Classified Theme_files/autocomplete-demo.js"></script>
 
 
 <div class="autocomplete-suggestions" style="position: absolute; display: none; max-height: 300px; z-index: 9999;"></div></body></html>

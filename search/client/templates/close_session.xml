@@ -1,0 +1,7 @@
+<request>
+	<type>2</type>
+	<guid>{{ guid }}</guid>
+	<body>
+		<guid>{{ guid }}</guid>
+	</body>
+</request>

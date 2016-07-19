@@ -12,3 +12,22 @@ class Station(models.Model):
 	city_eng = models.CharField(max_length=128, blank=True, null=True)
 	def __unicode__(self):
 		return self.long_name
+		
+class TrainSeat(models.Model):
+	number = models.CharField(max_length=128)
+	direction = models.CharField(max_length=128)
+	departure_time = models.CharField(max_length=128)
+	arrival_time = models.CharField(max_length=128)
+	duration = models.CharField(max_length=128)
+	common_seats = models.CharField(max_length=128)
+	common_tariff = models.CharField(max_length=128)
+	sitting_seats = models.CharField(max_length=128)
+	sitting_tariff = models.CharField(max_length=128)
+	reserved_seats = models.CharField(max_length=128)
+	reserved_tariff = models.CharField(max_length=128)
+	compartment_seats = models.CharField(max_length=128)
+	compartment_tariff = models.CharField(max_length=128)
+	soft_seats = models.CharField(max_length=128)
+	soft_tariff = models.CharField(max_length=128)
+	luxury_seats = models.CharField(max_length=128)
+	luxury_tariff = models.CharField(max_length=128)
