@@ -1,0 +1,62 @@
+				{% extends 'search/index.html' %}
+
+				{% load staticfiles %}
+
+				{% block body_block %}
+				
+				<div class="search-row-wrapper" style="background-image: url(http://i.huffpost.com/gen/1468570/images/o-EUROPE-TRAIN-TRAVEL-facebook.jpg); background-position: center center;">
+					<div class="container text-center">
+						<form action="/search/get_trains/" method="post">
+{% csrf_token %}
+
+						<div class="col-sm-3">
+							<select class="form-control" name="from_station" id="id-location">
+								<option value="{{ from_station.code }}" selected="selected">{{ from_station.long_name }}</option>
+								{% for station in stations %}
+								<option value="{{ station.code }}">{{ station.long_name }}</option>
+								{% endfor %}
+							</select>
+						</div>
+						<div class="col-sm-3">
+							<select class="form-control" name="to_station" id="id-location">
+								<option value="{{ to_station.code }}" selected="selected">{{ to_station.long_name }}</option>
+								{% for station in stations %}
+								<option value="{{ station.code }}">{{ station.long_name }}</option>
+								{% endfor %}
+							</select>
+						</div>
+						<div class="col-sm-3">
+							<input type="date" name="departure_date" class="form-control has-icon"  value="{{ departure_date }}">
+						</div>
+						<div class="col-sm-3">
+							<button type="submit" class="btn btn-block btn-primary  "> Поиск <i class="fa fa-search"></i></button>
+						</div>
+						</form>
+					</div>
+				</div>
+
+				<div class="main-container">
+					<div class="container">
+						<div class="row">
+							<div class="col-sm-12 page-content col-thin-left">
+								{% if ticket %}
+								<strong>
+								Номер заказа: {{ ticket.order_id }}<br>
+								Идентификатор заказа: {{ ticket.express_id }}<br>
+								Отправление: {{ ticket.departure_station }} {{ ticket.departure_day }} {{ ticket.departure_time }}<br>
+								Прибытие: {{ ticket.arrival_station }} {{ ticket.arrival_day }} {{ ticket.arrival_time }}<br>
+								Номер поезда: {{ ticket.train }}<br>
+								Номер вагона: {{ ticket.car_number }}<br>
+								Цена: {{ ticket.price }} ₸<br>
+								Имя пассажира: {{ ticket.full_name }}<br>
+								</strong>
+								{% else %}
+								{{ error }}
+								{% endif %}
+								
+							</div>
+
+															</div>
+														</div>
+
+														{% endblock %}

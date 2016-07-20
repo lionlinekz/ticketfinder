@@ -1,0 +1,95 @@
+				{% extends 'search/index.html' %}
+
+				{% load staticfiles %}
+
+				{% block body_block %}
+				
+				<div class="search-row-wrapper" style="background-image: url(http://i.huffpost.com/gen/1468570/images/o-EUROPE-TRAIN-TRAVEL-facebook.jpg); background-position: center center;">
+					<div class="container text-center">
+						<form action="/search/get_trains/" method="post">
+{% csrf_token %}
+
+						<div class="col-sm-3">
+							<select class="form-control" name="from_station" id="id-location">
+								<option value="{{ from_station.code }}" selected="selected">{{ from_station.long_name }}</option>
+								{% for station in stations %}
+								<option value="{{ station.code }}">{{ station.long_name }}</option>
+								{% endfor %}
+							</select>
+						</div>
+						<div class="col-sm-3">
+							<select class="form-control" name="to_station" id="id-location">
+								<option value="{{ to_station.code }}" selected="selected">{{ to_station.long_name }}</option>
+								{% for station in stations %}
+								<option value="{{ station.code }}">{{ station.long_name }}</option>
+								{% endfor %}
+							</select>
+						</div>
+						<div class="col-sm-3">
+							<input type="date" name="departure_date" class="form-control has-icon"  value="{{ departure_date }}">
+						</div>
+						<div class="col-sm-3">
+							<button type="submit" class="btn btn-block btn-primary  "> Поиск <i class="fa fa-search"></i></button>
+						</div>
+						</form>
+					</div>
+				</div>
+
+				<div class="main-container">
+					<div class="container">
+						<div class="row">
+							<div class="col-sm-12 page-content col-thin-left">
+								<strong>
+								Отправление: {{ from_station.long_name }} {{ departure_date }} {{ departure_time }}<br>
+								Прибытие: {{ to_station.long_name }}<br>
+								Вагон: {{ car_number }}<br>
+								Цена: {{ car_tariff }} ₸
+								</strong>
+								
+							</div>
+							<div class="col-sm-12 page-content col-thin-left">
+								<form action="/search/buy_ticket/" method="post">
+									{% csrf_token %}
+
+									<div class="row">
+										<div class="col-sm-2  col-xs-2">
+											<select class="form-control" name="doc_type" id="id-location">
+												<option value="УЛ" selected="selected">Удостоверение личности</option>
+												<option value="ПК">Паспорт Казахстана</option>
+												<option value="СР">Свидетельство о рождении</option>
+											</select>
+										</div>
+										<div class="col-sm-3  col-xs-3">
+											<input type="text" name="doc_number" class="form-control has-icon"   placeholder="Номер документа">
+										</div>
+										<div class="col-sm-3  col-xs-3">
+											<input type="text" name="last_name" class="form-control has-icon"  placeholder="Фамилия">
+										</div>
+										<div class="col-sm-2  col-xs-2">
+											<input type="text" name="first_name" class="form-control has-icon"  placeholder="Имя">
+										</div>
+
+										<div class="col-sm-2  col-xs-2">
+											<input type="text" name="middle_name" class="form-control has-icon"  placeholder="Отчество">
+										</div>
+									</div>
+
+
+										<div class="post-promo text-center">
+											<input type="hidden" name="train_number" value="{{ train_number }}">
+											<input type="hidden" name="car_number" value="{{ car_number }}">
+											<input type="hidden" name="car_type" value="{{ car_type }}">
+											<input type="hidden" name="from_station" value="{{ from_station.code }}">
+											<input type="hidden" name="to_station" value="{{ to_station.code }}">
+											<input type="hidden" name="departure_date" value="{{ departure_date }}">
+											<input type="hidden" name="departure_time" value="{{ departure_time }}">
+ 											<button type="submit" class="btn btn-lg btn-border btn-post btn-success"> Купить </button></div>
+
+										</div>
+										</form>
+
+																</div>
+															</div>
+														</div>
+
+														{% endblock %}

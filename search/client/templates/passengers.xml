@@ -1,1 +1,1 @@
-<Passengers><Blank>{% for passenger in passengers %}<Passenger><DocType>{{ passenger.doc_type }}</DocType><Doc>{{ passenger.doc_number }}</Doc><Name>{{ passenger.full_name }}</Name></Passenger>{% endfor %}{{ tariff }}<SeatsCount>{{ seats_number }}</SeatsCount></Blank></Passengers>
+<Passengers><Blank><Passenger><DocType>{{ doc_type }}</DocType><Doc>{{ doc_number }}</Doc><Name>{{ full_name }}</Name></Passenger>{{ tariff }}<SeatsCount>{{ seats_number }}</SeatsCount></Blank></Passengers>
