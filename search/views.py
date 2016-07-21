@@ -15,6 +15,13 @@ def index(request):
 	context_dict = {'stations': stations}
 	return render(request, 'search/index.html', context_dict)
 	
+def book(request):
+	stations = Station.objects.all()
+	context_dict = {'stations': stations}
+	if request.method == 'POST':
+		context_dict['message'] = u"Ваша заявка принята. Мы оповестим вас как только найдем подходящий по вашему запросу билет"
+	return render(request, 'search/book.html', context_dict)
+	
 def get_trains(request):
 	context_dict = {}
 	if request.method == 'POST':

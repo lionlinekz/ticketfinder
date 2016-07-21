@@ -1,0 +1,145 @@
+				{% extends 'search/index.html' %}
+
+				{% load staticfiles %}
+
+				{% block body_block %}
+
+<div class="main-container">
+<div class="container">
+	{% if message %}
+	<h2 class="title-2 uppercase"><strong> <i class="icon-briefcase"></i>  {{ message }} </strong></h2>
+	{% endif %}
+
+<div class="row">
+<div class="col-md-9 page-content">
+<div class="inner-box category-content">
+<h2 class="title-2 uppercase"><strong> <i class="icon-briefcase"></i>  Оставить заказ </strong></h2>
+<div class="row">
+<div class="col-sm-12">
+<form class="form-horizontal" method="post" action="/search/book/">
+										{% csrf_token %}
+
+<fieldset>
+ 
+<div class="form-group">
+<label class="col-md-3 control-label" for="CompanyName">Откуда</label>
+<div class="col-md-8">
+<select class="form-control" name="from_station" id="id-location">
+								{% for station in stations %}
+								<option value="{{ station.code }}">{{ station.long_name }}</option>
+								{% endfor %}
+							</select></div>
+</div>
+ 
+<div class="form-group">
+<label class="col-md-3 control-label" for="jobTitle">Куда</label>
+<div class="col-md-8">
+<select class="form-control" name="to_station" id="id-location">
+								{% for station in stations %}
+								<option value="{{ station.code }}">{{ station.long_name }}</option>
+								{% endfor %}
+							</select></div>
+</div>
+ 
+<div class="form-group">
+<label class="col-md-3 control-label">Дата отправления</label>
+<div class="col-md-8">
+							<input type="date" name="departure_date" class="form-control has-icon"  value="2016-08-08">
+</div>
+</div>
+ 
+ 
+<div class="form-group">
+<label class="col-md-3 control-label">Тип вагона</label>
+<div class="col-md-8">
+<select class="form-control" name="type" id="type">
+<option selected="" value="FULLTIME" name="FULLTIME">Любой
+</option>
+<option value="PARTTIME" name="PARTTIME">Плацкарт</option>
+<option value="TEMPORARY" name="TEMPORARY">Купе</option>
+<option value="CONTRACT" name="CONTRACT">Люкс</option>
+<option value="INTERNSHIP" name="INTERNSHIP">Общий</option>
+<option value="PERMANENT" name="PERMANENT">Плацкарт или Купе</option>
+<option value="Optional" name="Optional">Купе или Люкс</option>
+</select>
+</div>
+</div>
+ 
+<div class="form-group">
+<label class="col-md-3 control-label" for="Salary ">Максимальная цена</label>
+<div class="col-md-4">
+<div class="input-group">
+<input id="Salary " name="Salary " class="form-control" placeholder="10000" required="" type="text">
+<span class="input-group-addon">₸</span>
+</div>
+</div>
+</div>
+<div class="content-subheading"><i class="icon-user fa"></i> <strong>Информация о пассажире</strong></div>
+ 
+<div class="form-group">
+<label class="col-md-3 control-label" for="textinput-name">Тип документа</label>
+<div class="col-md-8">
+<select class="form-control" name="doc_type" id="id-location">
+												<option value="УЛ" selected="selected">Удостоверение личности</option>
+												<option value="ПК">Паспорт Казахстана</option>
+												<option value="СР">Свидетельство о рождении</option>
+											</select>
+</div>
+</div>
+ 
+<div class="form-group">
+<label class="col-md-3 control-label" for="seller-email"> Номер документа</label>
+<div class="col-md-8">
+<input id="Company-email" name="" class="form-control" placeholder="" required="" type="text">
+</div>
+</div>
+ 
+<div class="form-group">
+<label class="col-md-3 control-label" for="seller-Number">Фамилия</label>
+<div class="col-md-8">
+<input id="seller-Number" name="seller-Number" placeholder="" class="form-control input-md" required="" type="text">
+</div>
+</div>
+<div class="form-group">
+<label class="col-md-3 control-label" for="seller-Number">Имя</label>
+<div class="col-md-8">
+<input id="seller-Number" name="seller-Number" placeholder="" class="form-control input-md" required="" type="text">
+</div>
+</div>
+<div class="form-group">
+<label class="col-md-3 control-label" for="seller-Number">Отчество</label>
+<div class="col-md-8">
+<input id="seller-Number" name="seller-Number" placeholder="" class="form-control input-md" required="" type="text">
+</div>
+</div>
+
+ 
+<div class="form-group">
+<label class="col-md-3 control-label"></label>
+<div class="col-md-8">
+<label class="checkbox-inline" for="checkboxes-0">
+<input name="checkboxes" id="checkboxes-0" value="Remember above contact information." type="checkbox">
+Я принимаю условия </label>
+</div>
+</div>
+ 
+<div class="form-group">
+<label class="col-md-3 control-label"></label>
+<div class="col-md-8"><button type="submit" id="button1id" class="btn btn-success btn-lg">Оставить заказ</button></div>
+</div>
+</fieldset>
+</form>
+</div>
+</div>
+</div>
+</div>
+ 
+
+ 
+</div>
+ 
+</div>
+ 
+</div>
+														{% endblock %}
+
